@@ -10,6 +10,7 @@
  */
 export type * from './models/AdminUser'
 export type * from './models/InterestRateConfig'
+export type * from './models/InterestRateHistory'
 export type * from './models/LoanTenureOption'
 export type * from './models/CalculatorConfig'
 export type * from './models/FinancialContent'

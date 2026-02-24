@@ -28,6 +28,11 @@ export type AdminUser = Prisma.AdminUserModel
  */
 export type InterestRateConfig = Prisma.InterestRateConfigModel
 /**
+ * Model InterestRateHistory
+ * 
+ */
+export type InterestRateHistory = Prisma.InterestRateHistoryModel
+/**
  * Model LoanTenureOption
  * 
  */

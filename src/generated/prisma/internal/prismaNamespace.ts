@@ -386,6 +386,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   AdminUser: 'AdminUser',
   InterestRateConfig: 'InterestRateConfig',
+  InterestRateHistory: 'InterestRateHistory',
   LoanTenureOption: 'LoanTenureOption',
   CalculatorConfig: 'CalculatorConfig',
   FinancialContent: 'FinancialContent',
@@ -408,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "adminUser" | "interestRateConfig" | "loanTenureOption" | "calculatorConfig" | "financialContent" | "car" | "carImage" | "carSpecification" | "activityLog"
+    modelProps: "adminUser" | "interestRateConfig" | "interestRateHistory" | "loanTenureOption" | "calculatorConfig" | "financialContent" | "car" | "carImage" | "carSpecification" | "activityLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -557,6 +558,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.InterestRateConfigCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.InterestRateConfigCountAggregateOutputType> | number
+        }
+      }
+    }
+    InterestRateHistory: {
+      payload: Prisma.$InterestRateHistoryPayload<ExtArgs>
+      fields: Prisma.InterestRateHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InterestRateHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterestRateHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InterestRateHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterestRateHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.InterestRateHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterestRateHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InterestRateHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterestRateHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.InterestRateHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterestRateHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.InterestRateHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterestRateHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.InterestRateHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InterestRateHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterestRateHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.InterestRateHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterestRateHistoryPayload>
+        }
+        update: {
+          args: Prisma.InterestRateHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterestRateHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.InterestRateHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InterestRateHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InterestRateHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterestRateHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.InterestRateHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterestRateHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.InterestRateHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInterestRateHistory>
+        }
+        groupBy: {
+          args: Prisma.InterestRateHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InterestRateHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InterestRateHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InterestRateHistoryCountAggregateOutputType> | number
         }
       }
     }
@@ -1143,6 +1218,18 @@ export const InterestRateConfigScalarFieldEnum = {
 export type InterestRateConfigScalarFieldEnum = (typeof InterestRateConfigScalarFieldEnum)[keyof typeof InterestRateConfigScalarFieldEnum]
 
 
+export const InterestRateHistoryScalarFieldEnum = {
+  id: 'id',
+  previousRatePct: 'previousRatePct',
+  newRatePct: 'newRatePct',
+  changedById: 'changedById',
+  changedByRole: 'changedByRole',
+  createdAt: 'createdAt'
+} as const
+
+export type InterestRateHistoryScalarFieldEnum = (typeof InterestRateHistoryScalarFieldEnum)[keyof typeof InterestRateHistoryScalarFieldEnum]
+
+
 export const LoanTenureOptionScalarFieldEnum = {
   id: 'id',
   months: 'months',
@@ -1513,6 +1600,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   adminUser?: Prisma.AdminUserOmit
   interestRateConfig?: Prisma.InterestRateConfigOmit
+  interestRateHistory?: Prisma.InterestRateHistoryOmit
   loanTenureOption?: Prisma.LoanTenureOptionOmit
   calculatorConfig?: Prisma.CalculatorConfigOmit
   financialContent?: Prisma.FinancialContentOmit

@@ -215,6 +215,7 @@ export type AdminUserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"AdminUser"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AdminUser"> | Date | string
   activityLogs?: Prisma.ActivityLogListRelationFilter
+  interestRateChanges?: Prisma.InterestRateHistoryListRelationFilter
 }
 
 export type AdminUserOrderByWithRelationInput = {
@@ -228,6 +229,7 @@ export type AdminUserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   activityLogs?: Prisma.ActivityLogOrderByRelationAggregateInput
+  interestRateChanges?: Prisma.InterestRateHistoryOrderByRelationAggregateInput
 }
 
 export type AdminUserWhereUniqueInput = Prisma.AtLeast<{
@@ -244,6 +246,7 @@ export type AdminUserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"AdminUser"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AdminUser"> | Date | string
   activityLogs?: Prisma.ActivityLogListRelationFilter
+  interestRateChanges?: Prisma.InterestRateHistoryListRelationFilter
 }, "id" | "email">
 
 export type AdminUserOrderByWithAggregationInput = {
@@ -287,6 +290,7 @@ export type AdminUserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutActorInput
+  interestRateChanges?: Prisma.InterestRateHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type AdminUserUncheckedCreateInput = {
@@ -300,6 +304,7 @@ export type AdminUserUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutActorInput
+  interestRateChanges?: Prisma.InterestRateHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type AdminUserUpdateInput = {
@@ -313,6 +318,7 @@ export type AdminUserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   activityLogs?: Prisma.ActivityLogUpdateManyWithoutActorNestedInput
+  interestRateChanges?: Prisma.InterestRateHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type AdminUserUncheckedUpdateInput = {
@@ -326,6 +332,7 @@ export type AdminUserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutActorNestedInput
+  interestRateChanges?: Prisma.InterestRateHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type AdminUserCreateManyInput = {
@@ -429,6 +436,22 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type AdminUserCreateNestedOneWithoutInterestRateChangesInput = {
+  create?: Prisma.XOR<Prisma.AdminUserCreateWithoutInterestRateChangesInput, Prisma.AdminUserUncheckedCreateWithoutInterestRateChangesInput>
+  connectOrCreate?: Prisma.AdminUserCreateOrConnectWithoutInterestRateChangesInput
+  connect?: Prisma.AdminUserWhereUniqueInput
+}
+
+export type AdminUserUpdateOneWithoutInterestRateChangesNestedInput = {
+  create?: Prisma.XOR<Prisma.AdminUserCreateWithoutInterestRateChangesInput, Prisma.AdminUserUncheckedCreateWithoutInterestRateChangesInput>
+  connectOrCreate?: Prisma.AdminUserCreateOrConnectWithoutInterestRateChangesInput
+  upsert?: Prisma.AdminUserUpsertWithoutInterestRateChangesInput
+  disconnect?: Prisma.AdminUserWhereInput | boolean
+  delete?: Prisma.AdminUserWhereInput | boolean
+  connect?: Prisma.AdminUserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AdminUserUpdateToOneWithWhereWithoutInterestRateChangesInput, Prisma.AdminUserUpdateWithoutInterestRateChangesInput>, Prisma.AdminUserUncheckedUpdateWithoutInterestRateChangesInput>
+}
+
 export type AdminUserCreateNestedOneWithoutActivityLogsInput = {
   create?: Prisma.XOR<Prisma.AdminUserCreateWithoutActivityLogsInput, Prisma.AdminUserUncheckedCreateWithoutActivityLogsInput>
   connectOrCreate?: Prisma.AdminUserCreateOrConnectWithoutActivityLogsInput
@@ -445,6 +468,74 @@ export type AdminUserUpdateOneWithoutActivityLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AdminUserUpdateToOneWithWhereWithoutActivityLogsInput, Prisma.AdminUserUpdateWithoutActivityLogsInput>, Prisma.AdminUserUncheckedUpdateWithoutActivityLogsInput>
 }
 
+export type AdminUserCreateWithoutInterestRateChangesInput = {
+  id?: string
+  email: string
+  password: string
+  passwordResetTokenHash?: string | null
+  passwordResetExpiresAt?: Date | string | null
+  role: $Enums.Role
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutActorInput
+}
+
+export type AdminUserUncheckedCreateWithoutInterestRateChangesInput = {
+  id?: string
+  email: string
+  password: string
+  passwordResetTokenHash?: string | null
+  passwordResetExpiresAt?: Date | string | null
+  role: $Enums.Role
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type AdminUserCreateOrConnectWithoutInterestRateChangesInput = {
+  where: Prisma.AdminUserWhereUniqueInput
+  create: Prisma.XOR<Prisma.AdminUserCreateWithoutInterestRateChangesInput, Prisma.AdminUserUncheckedCreateWithoutInterestRateChangesInput>
+}
+
+export type AdminUserUpsertWithoutInterestRateChangesInput = {
+  update: Prisma.XOR<Prisma.AdminUserUpdateWithoutInterestRateChangesInput, Prisma.AdminUserUncheckedUpdateWithoutInterestRateChangesInput>
+  create: Prisma.XOR<Prisma.AdminUserCreateWithoutInterestRateChangesInput, Prisma.AdminUserUncheckedCreateWithoutInterestRateChangesInput>
+  where?: Prisma.AdminUserWhereInput
+}
+
+export type AdminUserUpdateToOneWithWhereWithoutInterestRateChangesInput = {
+  where?: Prisma.AdminUserWhereInput
+  data: Prisma.XOR<Prisma.AdminUserUpdateWithoutInterestRateChangesInput, Prisma.AdminUserUncheckedUpdateWithoutInterestRateChangesInput>
+}
+
+export type AdminUserUpdateWithoutInterestRateChangesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordResetTokenHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutActorNestedInput
+}
+
+export type AdminUserUncheckedUpdateWithoutInterestRateChangesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordResetTokenHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutActorNestedInput
+}
+
 export type AdminUserCreateWithoutActivityLogsInput = {
   id?: string
   email: string
@@ -455,6 +546,7 @@ export type AdminUserCreateWithoutActivityLogsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  interestRateChanges?: Prisma.InterestRateHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type AdminUserUncheckedCreateWithoutActivityLogsInput = {
@@ -467,6 +559,7 @@ export type AdminUserUncheckedCreateWithoutActivityLogsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  interestRateChanges?: Prisma.InterestRateHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type AdminUserCreateOrConnectWithoutActivityLogsInput = {
@@ -495,6 +588,7 @@ export type AdminUserUpdateWithoutActivityLogsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  interestRateChanges?: Prisma.InterestRateHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type AdminUserUncheckedUpdateWithoutActivityLogsInput = {
@@ -507,6 +601,7 @@ export type AdminUserUncheckedUpdateWithoutActivityLogsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  interestRateChanges?: Prisma.InterestRateHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 
@@ -516,10 +611,12 @@ export type AdminUserUncheckedUpdateWithoutActivityLogsInput = {
 
 export type AdminUserCountOutputType = {
   activityLogs: number
+  interestRateChanges: number
 }
 
 export type AdminUserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   activityLogs?: boolean | AdminUserCountOutputTypeCountActivityLogsArgs
+  interestRateChanges?: boolean | AdminUserCountOutputTypeCountInterestRateChangesArgs
 }
 
 /**
@@ -539,6 +636,13 @@ export type AdminUserCountOutputTypeCountActivityLogsArgs<ExtArgs extends runtim
   where?: Prisma.ActivityLogWhereInput
 }
 
+/**
+ * AdminUserCountOutputType without action
+ */
+export type AdminUserCountOutputTypeCountInterestRateChangesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InterestRateHistoryWhereInput
+}
+
 
 export type AdminUserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -551,6 +655,7 @@ export type AdminUserSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   createdAt?: boolean
   updatedAt?: boolean
   activityLogs?: boolean | Prisma.AdminUser$activityLogsArgs<ExtArgs>
+  interestRateChanges?: boolean | Prisma.AdminUser$interestRateChangesArgs<ExtArgs>
   _count?: boolean | Prisma.AdminUserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["adminUser"]>
 
@@ -593,6 +698,7 @@ export type AdminUserSelectScalar = {
 export type AdminUserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "passwordResetTokenHash" | "passwordResetExpiresAt" | "role" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["adminUser"]>
 export type AdminUserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   activityLogs?: boolean | Prisma.AdminUser$activityLogsArgs<ExtArgs>
+  interestRateChanges?: boolean | Prisma.AdminUser$interestRateChangesArgs<ExtArgs>
   _count?: boolean | Prisma.AdminUserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AdminUserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -602,6 +708,7 @@ export type $AdminUserPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   name: "AdminUser"
   objects: {
     activityLogs: Prisma.$ActivityLogPayload<ExtArgs>[]
+    interestRateChanges: Prisma.$InterestRateHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1008,6 +1115,7 @@ readonly fields: AdminUserFieldRefs;
 export interface Prisma__AdminUserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   activityLogs<T extends Prisma.AdminUser$activityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AdminUser$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  interestRateChanges<T extends Prisma.AdminUser$interestRateChangesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AdminUser$interestRateChangesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterestRateHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1455,6 +1563,30 @@ export type AdminUser$activityLogsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.ActivityLogScalarFieldEnum | Prisma.ActivityLogScalarFieldEnum[]
+}
+
+/**
+ * AdminUser.interestRateChanges
+ */
+export type AdminUser$interestRateChangesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InterestRateHistory
+   */
+  select?: Prisma.InterestRateHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InterestRateHistory
+   */
+  omit?: Prisma.InterestRateHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InterestRateHistoryInclude<ExtArgs> | null
+  where?: Prisma.InterestRateHistoryWhereInput
+  orderBy?: Prisma.InterestRateHistoryOrderByWithRelationInput | Prisma.InterestRateHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.InterestRateHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InterestRateHistoryScalarFieldEnum | Prisma.InterestRateHistoryScalarFieldEnum[]
 }
 
 /**

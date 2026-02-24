@@ -40,6 +40,7 @@ model AdminUser {
     createdAt    DateTime      @default(now())
     updatedAt    DateTime      @updatedAt
     activityLogs ActivityLog[]
+    interestRateChanges InterestRateHistory[]
 }
 
 model InterestRateConfig {
@@ -48,6 +49,19 @@ model InterestRateConfig {
     isPublished   Boolean  @default(true)
     createdAt     DateTime @default(now())
     updatedAt     DateTime @updatedAt
+}
+
+model InterestRateHistory {
+    id              String    @id @default(cuid())
+    previousRatePct Decimal?  @db.Decimal(5, 2)
+    newRatePct      Decimal   @db.Decimal(5, 2)
+    changedById     String?
+    changedByRole   Role?
+    createdAt       DateTime  @default(now())
+    changedBy       AdminUser? @relation(fields: [changedById], references: [id], onDelete: SetNull)
+
+    @@index([createdAt])
+    @@index([changedById])
 }
 
 model LoanTenureOption {

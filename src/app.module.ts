@@ -4,14 +4,14 @@ import { AdminConfigModule } from './admin-config/admin-config.module';
 import { AuthModule } from './auth/auth.module';
 import { CarsModule } from './cars/cars.module';
 import { PublicModule } from './public/public.module';
-import { StoreModule } from './store/store.module';
+import { PrismaModule } from './prisma/prisma.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
-    StoreModule,
+    PrismaModule,
     AuthModule,
     AdminConfigModule,
     CarsModule,

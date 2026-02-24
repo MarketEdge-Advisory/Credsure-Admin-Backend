@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   AdminUser: 'AdminUser',
   InterestRateConfig: 'InterestRateConfig',
+  InterestRateHistory: 'InterestRateHistory',
   LoanTenureOption: 'LoanTenureOption',
   CalculatorConfig: 'CalculatorConfig',
   FinancialContent: 'FinancialContent',
@@ -102,6 +103,18 @@ export const InterestRateConfigScalarFieldEnum = {
 } as const
 
 export type InterestRateConfigScalarFieldEnum = (typeof InterestRateConfigScalarFieldEnum)[keyof typeof InterestRateConfigScalarFieldEnum]
+
+
+export const InterestRateHistoryScalarFieldEnum = {
+  id: 'id',
+  previousRatePct: 'previousRatePct',
+  newRatePct: 'newRatePct',
+  changedById: 'changedById',
+  changedByRole: 'changedByRole',
+  createdAt: 'createdAt'
+} as const
+
+export type InterestRateHistoryScalarFieldEnum = (typeof InterestRateHistoryScalarFieldEnum)[keyof typeof InterestRateHistoryScalarFieldEnum]
 
 
 export const LoanTenureOptionScalarFieldEnum = {

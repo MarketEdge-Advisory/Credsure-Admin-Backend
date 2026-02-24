@@ -419,10 +419,6 @@ export type ActivityLogUncheckedUpdateManyWithoutActorNestedInput = {
   deleteMany?: Prisma.ActivityLogScalarWhereInput | Prisma.ActivityLogScalarWhereInput[]
 }
 
-export type NullableEnumRoleFieldUpdateOperationsInput = {
-  set?: $Enums.Role | null
-}
-
 export type ActivityLogCreateWithoutActorInput = {
   id?: string
   actorRole?: $Enums.Role | null

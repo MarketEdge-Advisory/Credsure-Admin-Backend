@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -18,6 +19,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { AdminConfigService } from './admin-config.service';
 import {
+  InterestRateHistoryQueryDto,
   SaveFinancialContentDto,
   UpdateCalculatorConfigDto,
   UpdateInterestRateDto,
@@ -35,6 +37,12 @@ export class AdminConfigController {
   @Get()
   getFinanceConfig() {
     return this.adminConfigService.getFinanceConfig();
+  }
+
+  @Roles(Role.CredsureAdmin, Role.SuperAdmin)
+  @Get('interest-rate/history')
+  getInterestRateHistory(@Query() query: InterestRateHistoryQueryDto) {
+    return this.adminConfigService.getInterestRateHistory(query);
   }
 
   @Roles(Role.CredsureAdmin, Role.SuperAdmin)
