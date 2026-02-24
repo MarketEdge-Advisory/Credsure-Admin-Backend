@@ -5,10 +5,127 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+    provider = "prisma-client"
+    output   = "../src/generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+    provider = "postgresql"
+}
+
+enum Role {
+    CREDSURE_ADMIN
+    SUZUKI_ADMIN
+    SUPER_ADMIN
+}
+
+enum ContentStatus {
+    DRAFT
+    PUBLISHED
+}
+
+enum CarAvailability {
+    AVAILABLE
+    OUT_OF_STOCK
+}
+
+model AdminUser {
+    id           String        @id @default(cuid())
+    email        String        @unique
+    password     String
+    passwordResetTokenHash String?
+    passwordResetExpiresAt DateTime?
+    role         Role
+    isActive     Boolean       @default(true)
+    createdAt    DateTime      @default(now())
+    updatedAt    DateTime      @updatedAt
+    activityLogs ActivityLog[]
+}
+
+model InterestRateConfig {
+    id            String   @id @default(cuid())
+    annualRatePct Decimal  @db.Decimal(5, 2)
+    isPublished   Boolean  @default(true)
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+}
+
+model LoanTenureOption {
+    id          String   @id @default(cuid())
+    months      Int      @unique
+    isPublished Boolean  @default(true)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model CalculatorConfig {
+    id               String   @id @default(cuid())
+    downPaymentPct   Decimal  @db.Decimal(5, 2)
+    processingFeePct Decimal  @db.Decimal(5, 2)
+    insuranceCost    Decimal  @db.Decimal(12, 2)
+    isPublished      Boolean  @default(true)
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
+}
+
+model FinancialContent {
+    id          String        @id @default(cuid())
+    title       String
+    body        String
+    disclaimer  String?
+    status      ContentStatus @default(DRAFT)
+    publishedAt DateTime?
+    createdAt   DateTime      @default(now())
+    updatedAt   DateTime      @updatedAt
+}
+
+model Car {
+    id             String             @id @default(cuid())
+    name           String
+    category       String
+    modelYear      Int
+    basePrice      Decimal            @db.Decimal(12, 2)
+    variant        String?
+    description    String?
+    availability   CarAvailability    @default(AVAILABLE)
+    isFeatured     Boolean            @default(false)
+    createdAt      DateTime           @default(now())
+    updatedAt      DateTime           @updatedAt
+    images         CarImage[]
+    specifications CarSpecification[]
+}
+
+model CarImage {
+    id        String   @id @default(cuid())
+    carId     String
+    imageUrl  String
+    position  Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    car       Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
+
+    @@unique([carId, position])
+}
+
+model CarSpecification {
+    id           String   @id @default(cuid())
+    carId        String
+    engine       String
+    transmission String
+    fuelType     String
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+    car          Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
+}
+
+model ActivityLog {
+    id         String     @id @default(cuid())
+    actorId    String?
+    actorRole  Role?
+    action     String
+    entityType String
+    entityId   String?
+    metadata   Json?
+    createdAt  DateTime   @default(now())
+    actor      AdminUser? @relation(fields: [actorId], references: [id], onDelete: SetNull)
 }
