@@ -1,5 +1,10 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Role } from '../common/enums/role.enum';
+import { MailService } from '../mail/mail.service';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   CreateFinanceApplicationDto,
@@ -9,7 +14,10 @@ import {
 
 @Injectable()
 export class FinanceApplicationsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly mailService: MailService,
+  ) {}
 
   async submitApplication(
     createFinanceApplicationDto: CreateFinanceApplicationDto,
@@ -38,7 +46,7 @@ export class FinanceApplicationsService {
         select: { id: true, name: true, variant: true, basePrice: true },
       });
       if (!car) {
-        throw new BadRequestException('Selected car not found.');
+        throw new BadRequestException('Car not found.');
       }
 
       if (!selectedVehicleValue) {
@@ -81,21 +89,31 @@ export class FinanceApplicationsService {
       },
     });
 
-    // TODO: Send notifications to Credsure + Suzuki admins once recipient policy is finalized.
-    // const admins = await this.prisma.adminUser.findMany({
-    //   where: {
-    //     isActive: true,
-    //     role: { in: ['CREDSURE_ADMIN', 'SUZUKI_ADMIN'] },
-    //   },
-    //   select: { email: true },
-    // });
-    // for (const admin of admins) {
-    //   await this.mailService.sendFinanceApplicationNotification({
-    //     to: admin.email,
-    //     fullName: created.fullName,
-    //     email: created.email,
-    //   });
-    // }
+    const admins = await this.prisma.adminUser.findMany({
+      where: {
+        isActive: true,
+        role: { in: ['CREDSURE_ADMIN', 'SUZUKI_ADMIN'] },
+      },
+      select: { email: true },
+    });
+
+    const notifyResults = await Promise.allSettled(
+      admins.map((admin) =>
+        this.mailService.sendFinanceApplicationNotification({
+          to: admin.email,
+          fullName: created.fullName,
+          email: created.email,
+        }),
+      ),
+    );
+    const failedNotificationCount = notifyResults.filter(
+      (result) => result.status === 'rejected',
+    ).length;
+    if (failedNotificationCount > 0) {
+      console.error(
+        `Failed to send ${failedNotificationCount} finance application notification email(s).`,
+      );
+    }
 
     return this.mapApplication(created);
   }
