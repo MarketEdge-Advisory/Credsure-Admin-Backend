@@ -28,7 +28,18 @@ export type ContentStatus = (typeof ContentStatus)[keyof typeof ContentStatus]
 
 export const CarAvailability = {
   AVAILABLE: 'AVAILABLE',
-  OUT_OF_STOCK: 'OUT_OF_STOCK'
+  NOT_AVAILABLE: 'NOT_AVAILABLE',
+  COMING_SOON: 'COMING_SOON'
 } as const
 
 export type CarAvailability = (typeof CarAvailability)[keyof typeof CarAvailability]
+
+
+export const FinanceApplicationStatus = {
+  PENDING: 'PENDING',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type FinanceApplicationStatus = (typeof FinanceApplicationStatus)[keyof typeof FinanceApplicationStatus]

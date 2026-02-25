@@ -27,10 +27,7 @@ import {
   UpsertCarImagesDto,
 } from './dto/cars.dto';
 
-@UseGuards(AuthGuard, RolesGuard)
-@Roles(Role.SuzukiAdmin, Role.SuperAdmin)
 @ApiTags('Cars')
-@ApiBearerAuth()
 @Controller('cars')
 export class CarsController {
   constructor(private readonly carsService: CarsService) {}
@@ -48,6 +45,9 @@ export class CarsController {
   }
 
   @Post()
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.SuzukiAdmin, Role.SuperAdmin)
+  @ApiBearerAuth()
   async createCar(
     @Req() req: RequestWithUser,
     @Body() createCarDto: CreateCarDto,
@@ -61,6 +61,9 @@ export class CarsController {
   }
 
   @Patch(':carId')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.SuzukiAdmin, Role.SuperAdmin)
+  @ApiBearerAuth()
   async updateCar(
     @Req() req: RequestWithUser,
     @Param('carId') carId: string,
@@ -76,6 +79,9 @@ export class CarsController {
   }
 
   @Patch(':carId/price')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.SuzukiAdmin, Role.SuperAdmin)
+  @ApiBearerAuth()
   async updatePrice(
     @Req() req: RequestWithUser,
     @Param('carId') carId: string,
@@ -91,6 +97,9 @@ export class CarsController {
   }
 
   @Patch(':carId/images')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.SuzukiAdmin, Role.SuperAdmin)
+  @ApiBearerAuth()
   async upsertImages(
     @Req() req: RequestWithUser,
     @Param('carId') carId: string,
@@ -106,6 +115,9 @@ export class CarsController {
   }
 
   @Delete(':carId/images/:imageId')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.SuzukiAdmin, Role.SuperAdmin)
+  @ApiBearerAuth()
   async deleteImage(
     @Req() req: RequestWithUser,
     @Param('carId') carId: string,
@@ -121,6 +133,9 @@ export class CarsController {
   }
 
   @Patch(':carId/images/reorder')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.SuzukiAdmin, Role.SuperAdmin)
+  @ApiBearerAuth()
   async reorderImages(
     @Req() req: RequestWithUser,
     @Param('carId') carId: string,
@@ -136,6 +151,9 @@ export class CarsController {
   }
 
   @Patch(':carId/availability')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.SuzukiAdmin, Role.SuperAdmin)
+  @ApiBearerAuth()
   async toggleAvailability(
     @Req() req: RequestWithUser,
     @Param('carId') carId: string,
@@ -151,6 +169,9 @@ export class CarsController {
   }
 
   @Patch(':carId/featured')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.SuzukiAdmin, Role.SuperAdmin)
+  @ApiBearerAuth()
   async toggleFeatured(
     @Req() req: RequestWithUser,
     @Param('carId') carId: string,
@@ -166,6 +187,9 @@ export class CarsController {
   }
 
   @Delete(':carId')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.SuzukiAdmin, Role.SuperAdmin)
+  @ApiBearerAuth()
   async deleteCar(@Req() req: RequestWithUser, @Param('carId') carId: string) {
     const result = await this.carsService.deleteCar(
       req.user!.userId,

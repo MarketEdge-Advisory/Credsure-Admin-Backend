@@ -348,6 +348,23 @@ export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
   _max?: Prisma.NestedJsonNullableFilter<$PrismaModel>
 }
 
+export type EnumFinanceApplicationStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FinanceApplicationStatus | Prisma.EnumFinanceApplicationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FinanceApplicationStatus[] | Prisma.ListEnumFinanceApplicationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FinanceApplicationStatus[] | Prisma.ListEnumFinanceApplicationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFinanceApplicationStatusFilter<$PrismaModel> | $Enums.FinanceApplicationStatus
+}
+
+export type EnumFinanceApplicationStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FinanceApplicationStatus | Prisma.EnumFinanceApplicationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FinanceApplicationStatus[] | Prisma.ListEnumFinanceApplicationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FinanceApplicationStatus[] | Prisma.ListEnumFinanceApplicationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFinanceApplicationStatusWithAggregatesFilter<$PrismaModel> | $Enums.FinanceApplicationStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFinanceApplicationStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFinanceApplicationStatusFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -666,6 +683,23 @@ export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
   gt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   gte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
+}
+
+export type NestedEnumFinanceApplicationStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FinanceApplicationStatus | Prisma.EnumFinanceApplicationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FinanceApplicationStatus[] | Prisma.ListEnumFinanceApplicationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FinanceApplicationStatus[] | Prisma.ListEnumFinanceApplicationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFinanceApplicationStatusFilter<$PrismaModel> | $Enums.FinanceApplicationStatus
+}
+
+export type NestedEnumFinanceApplicationStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FinanceApplicationStatus | Prisma.EnumFinanceApplicationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FinanceApplicationStatus[] | Prisma.ListEnumFinanceApplicationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FinanceApplicationStatus[] | Prisma.ListEnumFinanceApplicationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFinanceApplicationStatusWithAggregatesFilter<$PrismaModel> | $Enums.FinanceApplicationStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFinanceApplicationStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFinanceApplicationStatusFilter<$PrismaModel>
 }
 
 

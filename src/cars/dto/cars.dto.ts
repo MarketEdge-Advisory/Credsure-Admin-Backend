@@ -73,6 +73,14 @@ export class CreateCarDto {
   @IsString()
   description?: string;
 
+  @ApiPropertyOptional({
+    enum: ['AVAILABLE', 'NOT_AVAILABLE', 'COMING_SOON'],
+    example: 'AVAILABLE',
+  })
+  @IsOptional()
+  @IsIn(['AVAILABLE', 'NOT_AVAILABLE', 'COMING_SOON'])
+  availability?: 'AVAILABLE' | 'NOT_AVAILABLE' | 'COMING_SOON';
+
   @ApiProperty({ type: CarSpecsDto })
   @ValidateNested()
   @Type(() => CarSpecsDto)
@@ -159,9 +167,12 @@ export class ReorderImagesDto {
 }
 
 export class ToggleAvailabilityDto {
-  @ApiProperty({ enum: ['AVAILABLE', 'OUT_OF_STOCK'], example: 'AVAILABLE' })
-  @IsIn(['AVAILABLE', 'OUT_OF_STOCK'])
-  availability: 'AVAILABLE' | 'OUT_OF_STOCK';
+  @ApiProperty({
+    enum: ['AVAILABLE', 'NOT_AVAILABLE', 'COMING_SOON'],
+    example: 'AVAILABLE',
+  })
+  @IsIn(['AVAILABLE', 'NOT_AVAILABLE', 'COMING_SOON'])
+  availability: 'AVAILABLE' | 'NOT_AVAILABLE' | 'COMING_SOON';
 }
 
 export class ToggleFeaturedDto {

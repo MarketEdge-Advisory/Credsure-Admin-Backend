@@ -42,7 +42,17 @@ export class CarsService {
     actorRole: Role,
     createCarDto: CreateCarDto,
   ) {
-    const { name, category, modelYear, basePrice, variant, description, specs, images } =
+    const {
+      name,
+      category,
+      modelYear,
+      basePrice,
+      variant,
+      description,
+      availability,
+      specs,
+      images,
+    } =
       createCarDto;
 
     const created = await this.prisma.car.create({
@@ -53,6 +63,7 @@ export class CarsService {
         basePrice: basePrice.toFixed(2),
         variant: variant?.trim() || null,
         description: description?.trim() || null,
+        availability: availability ?? 'AVAILABLE',
         specifications: {
           create: {
             engine: specs.engine.trim(),
@@ -447,7 +458,7 @@ export class CarsService {
     basePrice: unknown;
     variant: string | null;
     description: string | null;
-    availability: 'AVAILABLE' | 'OUT_OF_STOCK';
+    availability: 'AVAILABLE' | 'NOT_AVAILABLE' | 'COMING_SOON';
     isFeatured: boolean;
     createdAt: Date;
     updatedAt: Date;

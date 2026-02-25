@@ -393,7 +393,8 @@ export const ModelName = {
   Car: 'Car',
   CarImage: 'CarImage',
   CarSpecification: 'CarSpecification',
-  ActivityLog: 'ActivityLog'
+  ActivityLog: 'ActivityLog',
+  FinanceApplication: 'FinanceApplication'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -409,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "adminUser" | "interestRateConfig" | "interestRateHistory" | "loanTenureOption" | "calculatorConfig" | "financialContent" | "car" | "carImage" | "carSpecification" | "activityLog"
+    modelProps: "adminUser" | "interestRateConfig" | "interestRateHistory" | "loanTenureOption" | "calculatorConfig" | "financialContent" | "car" | "carImage" | "carSpecification" | "activityLog" | "financeApplication"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1153,6 +1154,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FinanceApplication: {
+      payload: Prisma.$FinanceApplicationPayload<ExtArgs>
+      fields: Prisma.FinanceApplicationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FinanceApplicationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceApplicationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FinanceApplicationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceApplicationPayload>
+        }
+        findFirst: {
+          args: Prisma.FinanceApplicationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceApplicationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FinanceApplicationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceApplicationPayload>
+        }
+        findMany: {
+          args: Prisma.FinanceApplicationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceApplicationPayload>[]
+        }
+        create: {
+          args: Prisma.FinanceApplicationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceApplicationPayload>
+        }
+        createMany: {
+          args: Prisma.FinanceApplicationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FinanceApplicationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceApplicationPayload>[]
+        }
+        delete: {
+          args: Prisma.FinanceApplicationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceApplicationPayload>
+        }
+        update: {
+          args: Prisma.FinanceApplicationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceApplicationPayload>
+        }
+        deleteMany: {
+          args: Prisma.FinanceApplicationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FinanceApplicationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FinanceApplicationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceApplicationPayload>[]
+        }
+        upsert: {
+          args: Prisma.FinanceApplicationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinanceApplicationPayload>
+        }
+        aggregate: {
+          args: Prisma.FinanceApplicationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFinanceApplication>
+        }
+        groupBy: {
+          args: Prisma.FinanceApplicationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FinanceApplicationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FinanceApplicationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FinanceApplicationCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1324,6 +1399,27 @@ export const ActivityLogScalarFieldEnum = {
 export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
 
 
+export const FinanceApplicationScalarFieldEnum = {
+  id: 'id',
+  fullName: 'fullName',
+  phoneNumber: 'phoneNumber',
+  email: 'email',
+  employmentStatus: 'employmentStatus',
+  estimatedNetMonthlyIncome: 'estimatedNetMonthlyIncome',
+  carId: 'carId',
+  selectedVehicle: 'selectedVehicle',
+  vehicleAmount: 'vehicleAmount',
+  downPayment: 'downPayment',
+  monthlyPayment: 'monthlyPayment',
+  status: 'status',
+  consentGiven: 'consentGiven',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FinanceApplicationScalarFieldEnum = (typeof FinanceApplicationScalarFieldEnum)[keyof typeof FinanceApplicationScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1491,6 +1587,20 @@ export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
 
 
 /**
+ * Reference to a field of type 'FinanceApplicationStatus'
+ */
+export type EnumFinanceApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FinanceApplicationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'FinanceApplicationStatus[]'
+ */
+export type ListEnumFinanceApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FinanceApplicationStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1608,6 +1718,7 @@ export type GlobalOmitConfig = {
   carImage?: Prisma.CarImageOmit
   carSpecification?: Prisma.CarSpecificationOmit
   activityLog?: Prisma.ActivityLogOmit
+  financeApplication?: Prisma.FinanceApplicationOmit
 }
 
 /* Types for Logging */

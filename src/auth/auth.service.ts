@@ -7,6 +7,7 @@ import {
 import { createHash, randomInt } from 'crypto';
 import { Role as PrismaRole } from '../generated/prisma/client';
 import { Role } from '../common/enums/role.enum';
+import { MailService } from '../mail/mail.service';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   BootstrapAdminDto,
@@ -23,7 +24,10 @@ import { createToken, verifyToken } from './token.util';
 export class AuthService {
   private static readonly PASSWORD_RESET_TTL_MS = 15 * 60 * 1000;
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly mailService: MailService,
+  ) {}
 
   async login(loginDto: LoginDto): Promise<{
     accessToken: string;
@@ -60,7 +64,7 @@ export class AuthService {
 
   async forgotPassword(
     forgotPasswordDto: ForgotPasswordDto,
-  ): Promise<{ accepted: true; resetCode?: string }> {
+  ): Promise<{ accepted: true }> {
     const { email } = forgotPasswordDto;
 
     const user = await this.prisma.adminUser.findUnique({
@@ -87,12 +91,16 @@ export class AuthService {
       },
     });
 
-    // TODO: Send resetCode to user email address.
-    if (process.env.NODE_ENV === 'production') {
-      return { accepted: true };
+    try {
+      await this.mailService.sendResetPasswordCode({
+        to: email,
+        code: resetCode,
+      });
+    } catch (error) {
+      console.error('Failed to send reset password email:', error);
     }
 
-    return { accepted: true, resetCode };
+    return { accepted: true };
   }
 
   async resetPassword(

@@ -67,3 +67,8 @@ export type CarSpecification = Prisma.CarSpecificationModel
  * 
  */
 export type ActivityLog = Prisma.ActivityLogModel
+/**
+ * Model FinanceApplication
+ * 
+ */
+export type FinanceApplication = Prisma.FinanceApplicationModel

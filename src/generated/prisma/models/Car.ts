@@ -270,6 +270,7 @@ export type CarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Car"> | Date | string
   images?: Prisma.CarImageListRelationFilter
   specifications?: Prisma.CarSpecificationListRelationFilter
+  financeApplications?: Prisma.FinanceApplicationListRelationFilter
 }
 
 export type CarOrderByWithRelationInput = {
@@ -286,6 +287,7 @@ export type CarOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   images?: Prisma.CarImageOrderByRelationAggregateInput
   specifications?: Prisma.CarSpecificationOrderByRelationAggregateInput
+  financeApplications?: Prisma.FinanceApplicationOrderByRelationAggregateInput
 }
 
 export type CarWhereUniqueInput = Prisma.AtLeast<{
@@ -305,6 +307,7 @@ export type CarWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Car"> | Date | string
   images?: Prisma.CarImageListRelationFilter
   specifications?: Prisma.CarSpecificationListRelationFilter
+  financeApplications?: Prisma.FinanceApplicationListRelationFilter
 }, "id">
 
 export type CarOrderByWithAggregationInput = {
@@ -357,6 +360,7 @@ export type CarCreateInput = {
   updatedAt?: Date | string
   images?: Prisma.CarImageCreateNestedManyWithoutCarInput
   specifications?: Prisma.CarSpecificationCreateNestedManyWithoutCarInput
+  financeApplications?: Prisma.FinanceApplicationCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateInput = {
@@ -373,6 +377,7 @@ export type CarUncheckedCreateInput = {
   updatedAt?: Date | string
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutCarInput
   specifications?: Prisma.CarSpecificationUncheckedCreateNestedManyWithoutCarInput
+  financeApplications?: Prisma.FinanceApplicationUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarUpdateInput = {
@@ -389,6 +394,7 @@ export type CarUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.CarImageUpdateManyWithoutCarNestedInput
   specifications?: Prisma.CarSpecificationUpdateManyWithoutCarNestedInput
+  financeApplications?: Prisma.FinanceApplicationUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateInput = {
@@ -405,6 +411,7 @@ export type CarUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.CarImageUncheckedUpdateManyWithoutCarNestedInput
   specifications?: Prisma.CarSpecificationUncheckedUpdateManyWithoutCarNestedInput
+  financeApplications?: Prisma.FinanceApplicationUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateManyInput = {
@@ -506,6 +513,11 @@ export type CarScalarRelationFilter = {
   isNot?: Prisma.CarWhereInput
 }
 
+export type CarNullableScalarRelationFilter = {
+  is?: Prisma.CarWhereInput | null
+  isNot?: Prisma.CarWhereInput | null
+}
+
 export type EnumCarAvailabilityFieldUpdateOperationsInput = {
   set?: $Enums.CarAvailability
 }
@@ -538,6 +550,22 @@ export type CarUpdateOneRequiredWithoutSpecificationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CarUpdateToOneWithWhereWithoutSpecificationsInput, Prisma.CarUpdateWithoutSpecificationsInput>, Prisma.CarUncheckedUpdateWithoutSpecificationsInput>
 }
 
+export type CarCreateNestedOneWithoutFinanceApplicationsInput = {
+  create?: Prisma.XOR<Prisma.CarCreateWithoutFinanceApplicationsInput, Prisma.CarUncheckedCreateWithoutFinanceApplicationsInput>
+  connectOrCreate?: Prisma.CarCreateOrConnectWithoutFinanceApplicationsInput
+  connect?: Prisma.CarWhereUniqueInput
+}
+
+export type CarUpdateOneWithoutFinanceApplicationsNestedInput = {
+  create?: Prisma.XOR<Prisma.CarCreateWithoutFinanceApplicationsInput, Prisma.CarUncheckedCreateWithoutFinanceApplicationsInput>
+  connectOrCreate?: Prisma.CarCreateOrConnectWithoutFinanceApplicationsInput
+  upsert?: Prisma.CarUpsertWithoutFinanceApplicationsInput
+  disconnect?: Prisma.CarWhereInput | boolean
+  delete?: Prisma.CarWhereInput | boolean
+  connect?: Prisma.CarWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CarUpdateToOneWithWhereWithoutFinanceApplicationsInput, Prisma.CarUpdateWithoutFinanceApplicationsInput>, Prisma.CarUncheckedUpdateWithoutFinanceApplicationsInput>
+}
+
 export type CarCreateWithoutImagesInput = {
   id?: string
   name: string
@@ -551,6 +579,7 @@ export type CarCreateWithoutImagesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   specifications?: Prisma.CarSpecificationCreateNestedManyWithoutCarInput
+  financeApplications?: Prisma.FinanceApplicationCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutImagesInput = {
@@ -566,6 +595,7 @@ export type CarUncheckedCreateWithoutImagesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   specifications?: Prisma.CarSpecificationUncheckedCreateNestedManyWithoutCarInput
+  financeApplications?: Prisma.FinanceApplicationUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutImagesInput = {
@@ -597,6 +627,7 @@ export type CarUpdateWithoutImagesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   specifications?: Prisma.CarSpecificationUpdateManyWithoutCarNestedInput
+  financeApplications?: Prisma.FinanceApplicationUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutImagesInput = {
@@ -612,6 +643,7 @@ export type CarUncheckedUpdateWithoutImagesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   specifications?: Prisma.CarSpecificationUncheckedUpdateManyWithoutCarNestedInput
+  financeApplications?: Prisma.FinanceApplicationUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutSpecificationsInput = {
@@ -627,6 +659,7 @@ export type CarCreateWithoutSpecificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.CarImageCreateNestedManyWithoutCarInput
+  financeApplications?: Prisma.FinanceApplicationCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutSpecificationsInput = {
@@ -642,6 +675,7 @@ export type CarUncheckedCreateWithoutSpecificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.CarImageUncheckedCreateNestedManyWithoutCarInput
+  financeApplications?: Prisma.FinanceApplicationUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutSpecificationsInput = {
@@ -673,6 +707,7 @@ export type CarUpdateWithoutSpecificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.CarImageUpdateManyWithoutCarNestedInput
+  financeApplications?: Prisma.FinanceApplicationUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutSpecificationsInput = {
@@ -688,6 +723,87 @@ export type CarUncheckedUpdateWithoutSpecificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.CarImageUncheckedUpdateManyWithoutCarNestedInput
+  financeApplications?: Prisma.FinanceApplicationUncheckedUpdateManyWithoutCarNestedInput
+}
+
+export type CarCreateWithoutFinanceApplicationsInput = {
+  id?: string
+  name: string
+  category: string
+  modelYear: number
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  variant?: string | null
+  description?: string | null
+  availability?: $Enums.CarAvailability
+  isFeatured?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  images?: Prisma.CarImageCreateNestedManyWithoutCarInput
+  specifications?: Prisma.CarSpecificationCreateNestedManyWithoutCarInput
+}
+
+export type CarUncheckedCreateWithoutFinanceApplicationsInput = {
+  id?: string
+  name: string
+  category: string
+  modelYear: number
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  variant?: string | null
+  description?: string | null
+  availability?: $Enums.CarAvailability
+  isFeatured?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  images?: Prisma.CarImageUncheckedCreateNestedManyWithoutCarInput
+  specifications?: Prisma.CarSpecificationUncheckedCreateNestedManyWithoutCarInput
+}
+
+export type CarCreateOrConnectWithoutFinanceApplicationsInput = {
+  where: Prisma.CarWhereUniqueInput
+  create: Prisma.XOR<Prisma.CarCreateWithoutFinanceApplicationsInput, Prisma.CarUncheckedCreateWithoutFinanceApplicationsInput>
+}
+
+export type CarUpsertWithoutFinanceApplicationsInput = {
+  update: Prisma.XOR<Prisma.CarUpdateWithoutFinanceApplicationsInput, Prisma.CarUncheckedUpdateWithoutFinanceApplicationsInput>
+  create: Prisma.XOR<Prisma.CarCreateWithoutFinanceApplicationsInput, Prisma.CarUncheckedCreateWithoutFinanceApplicationsInput>
+  where?: Prisma.CarWhereInput
+}
+
+export type CarUpdateToOneWithWhereWithoutFinanceApplicationsInput = {
+  where?: Prisma.CarWhereInput
+  data: Prisma.XOR<Prisma.CarUpdateWithoutFinanceApplicationsInput, Prisma.CarUncheckedUpdateWithoutFinanceApplicationsInput>
+}
+
+export type CarUpdateWithoutFinanceApplicationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  modelYear?: Prisma.IntFieldUpdateOperationsInput | number
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  variant?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  availability?: Prisma.EnumCarAvailabilityFieldUpdateOperationsInput | $Enums.CarAvailability
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  images?: Prisma.CarImageUpdateManyWithoutCarNestedInput
+  specifications?: Prisma.CarSpecificationUpdateManyWithoutCarNestedInput
+}
+
+export type CarUncheckedUpdateWithoutFinanceApplicationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  modelYear?: Prisma.IntFieldUpdateOperationsInput | number
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  variant?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  availability?: Prisma.EnumCarAvailabilityFieldUpdateOperationsInput | $Enums.CarAvailability
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  images?: Prisma.CarImageUncheckedUpdateManyWithoutCarNestedInput
+  specifications?: Prisma.CarSpecificationUncheckedUpdateManyWithoutCarNestedInput
 }
 
 
@@ -698,11 +814,13 @@ export type CarUncheckedUpdateWithoutSpecificationsInput = {
 export type CarCountOutputType = {
   images: number
   specifications: number
+  financeApplications: number
 }
 
 export type CarCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | CarCountOutputTypeCountImagesArgs
   specifications?: boolean | CarCountOutputTypeCountSpecificationsArgs
+  financeApplications?: boolean | CarCountOutputTypeCountFinanceApplicationsArgs
 }
 
 /**
@@ -729,6 +847,13 @@ export type CarCountOutputTypeCountSpecificationsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.CarSpecificationWhereInput
 }
 
+/**
+ * CarCountOutputType without action
+ */
+export type CarCountOutputTypeCountFinanceApplicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FinanceApplicationWhereInput
+}
+
 
 export type CarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -744,6 +869,7 @@ export type CarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   updatedAt?: boolean
   images?: boolean | Prisma.Car$imagesArgs<ExtArgs>
   specifications?: boolean | Prisma.Car$specificationsArgs<ExtArgs>
+  financeApplications?: boolean | Prisma.Car$financeApplicationsArgs<ExtArgs>
   _count?: boolean | Prisma.CarCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["car"]>
 
@@ -793,6 +919,7 @@ export type CarOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
 export type CarInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | Prisma.Car$imagesArgs<ExtArgs>
   specifications?: boolean | Prisma.Car$specificationsArgs<ExtArgs>
+  financeApplications?: boolean | Prisma.Car$financeApplicationsArgs<ExtArgs>
   _count?: boolean | Prisma.CarCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CarIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -803,6 +930,7 @@ export type $CarPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   objects: {
     images: Prisma.$CarImagePayload<ExtArgs>[]
     specifications: Prisma.$CarSpecificationPayload<ExtArgs>[]
+    financeApplications: Prisma.$FinanceApplicationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1212,6 +1340,7 @@ export interface Prisma__CarClient<T, Null = never, ExtArgs extends runtime.Type
   readonly [Symbol.toStringTag]: "PrismaPromise"
   images<T extends Prisma.Car$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   specifications<T extends Prisma.Car$specificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$specificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarSpecificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  financeApplications<T extends Prisma.Car$financeApplicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$financeApplicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinanceApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1685,6 +1814,30 @@ export type Car$specificationsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.CarSpecificationScalarFieldEnum | Prisma.CarSpecificationScalarFieldEnum[]
+}
+
+/**
+ * Car.financeApplications
+ */
+export type Car$financeApplicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FinanceApplication
+   */
+  select?: Prisma.FinanceApplicationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FinanceApplication
+   */
+  omit?: Prisma.FinanceApplicationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FinanceApplicationInclude<ExtArgs> | null
+  where?: Prisma.FinanceApplicationWhereInput
+  orderBy?: Prisma.FinanceApplicationOrderByWithRelationInput | Prisma.FinanceApplicationOrderByWithRelationInput[]
+  cursor?: Prisma.FinanceApplicationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FinanceApplicationScalarFieldEnum | Prisma.FinanceApplicationScalarFieldEnum[]
 }
 
 /**

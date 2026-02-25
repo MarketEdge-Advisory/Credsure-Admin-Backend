@@ -60,7 +60,8 @@ export const ModelName = {
   Car: 'Car',
   CarImage: 'CarImage',
   CarSpecification: 'CarSpecification',
-  ActivityLog: 'ActivityLog'
+  ActivityLog: 'ActivityLog',
+  FinanceApplication: 'FinanceApplication'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -209,6 +210,27 @@ export const ActivityLogScalarFieldEnum = {
 } as const
 
 export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
+
+
+export const FinanceApplicationScalarFieldEnum = {
+  id: 'id',
+  fullName: 'fullName',
+  phoneNumber: 'phoneNumber',
+  email: 'email',
+  employmentStatus: 'employmentStatus',
+  estimatedNetMonthlyIncome: 'estimatedNetMonthlyIncome',
+  carId: 'carId',
+  selectedVehicle: 'selectedVehicle',
+  vehicleAmount: 'vehicleAmount',
+  downPayment: 'downPayment',
+  monthlyPayment: 'monthlyPayment',
+  status: 'status',
+  consentGiven: 'consentGiven',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FinanceApplicationScalarFieldEnum = (typeof FinanceApplicationScalarFieldEnum)[keyof typeof FinanceApplicationScalarFieldEnum]
 
 
 export const SortOrder = {

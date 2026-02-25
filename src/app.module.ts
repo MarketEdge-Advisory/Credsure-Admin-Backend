@@ -3,6 +3,7 @@ import { ActivityModule } from './activity/activity.module';
 import { AdminConfigModule } from './admin-config/admin-config.module';
 import { AuthModule } from './auth/auth.module';
 import { CarsModule } from './cars/cars.module';
+import { FinanceApplicationsModule } from './finance-applications/finance-applications.module';
 import { PublicModule } from './public/public.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AppController } from './app.controller';
@@ -15,6 +16,7 @@ import { UploadModule } from './upload/upload.module';
     AuthModule,
     AdminConfigModule,
     CarsModule,
+    FinanceApplicationsModule,
     PublicModule,
     ActivityModule,
     UploadModule,

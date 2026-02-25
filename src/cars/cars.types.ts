@@ -18,7 +18,7 @@ export interface CarView {
   basePrice: number;
   variant: string;
   description: string;
-  availability: 'AVAILABLE' | 'OUT_OF_STOCK';
+  availability: 'AVAILABLE' | 'NOT_AVAILABLE' | 'COMING_SOON';
   isFeatured: boolean;
   specs: CarSpecView;
   images: CarImageView[];
