@@ -58,8 +58,8 @@ export class CarsService {
     const created = await this.prisma.car.create({
       data: {
         name: name.trim(),
-        category: category.trim(),
-        modelYear,
+        category: category?.trim() || 'Uncategorized',
+        modelYear: modelYear ?? new Date().getFullYear(),
         basePrice: basePrice.toFixed(2),
         variant: variant?.trim() || null,
         description: description?.trim() || null,
@@ -68,7 +68,7 @@ export class CarsService {
           create: {
             engine: specs.engine.trim(),
             transmission: specs.transmission.trim(),
-            fuelType: specs.fuelType.trim(),
+            fuelType: specs.fuelType?.trim() || '',
           },
         },
         images: images?.length
@@ -143,7 +143,7 @@ export class CarsService {
             carId,
             engine: specs.engine.trim(),
             transmission: specs.transmission.trim(),
-            fuelType: specs.fuelType.trim(),
+            fuelType: specs.fuelType?.trim() || '',
           },
         });
       }

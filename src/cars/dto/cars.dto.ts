@@ -27,9 +27,9 @@ export class CarSpecsDto {
   transmission: string;
 
   @ApiProperty({ example: 'Petrol' })
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  fuelType: string;
+  fuelType?: string;
 }
 
 export class CarImageInputDto {
@@ -48,15 +48,16 @@ export class CreateCarDto {
   @IsNotEmpty()
   name: string;
 
-  @ApiProperty({ example: 'Hatchback' })
+  @ApiPropertyOptional({ example: 'Hatchback' })
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  category: string;
+  category?: string;
 
-  @ApiProperty({ example: 2026 })
+  @ApiPropertyOptional({ example: 2026 })
+  @IsOptional()
   @IsInt()
   @Min(1990)
-  modelYear: number;
+  modelYear?: number;
 
   @ApiProperty({ example: 18500000 })
   @IsNumber()

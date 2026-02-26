@@ -89,29 +89,16 @@ export class FinanceApplicationsService {
       },
     });
 
-    const admins = await this.prisma.adminUser.findMany({
-      where: {
-        isActive: true,
-        role: { in: ['CREDSURE_ADMIN', 'SUZUKI_ADMIN'] },
-      },
-      select: { email: true },
-    });
-
-    const notifyResults = await Promise.allSettled(
-      admins.map((admin) =>
-        this.mailService.sendFinanceApplicationNotification({
-          to: admin.email,
-          fullName: created.fullName,
-          email: created.email,
-        }),
-      ),
-    );
-    const failedNotificationCount = notifyResults.filter(
-      (result) => result.status === 'rejected',
-    ).length;
-    if (failedNotificationCount > 0) {
+    try {
+      await this.mailService.sendFinanceApplicationNotification({
+        to: created.email,
+        fullName: created.fullName,
+        email: created.email,
+      });
+    } catch (error) {
       console.error(
-        `Failed to send ${failedNotificationCount} finance application notification email(s).`,
+        'Failed to send finance application confirmation email to customer:',
+        error,
       );
     }
 

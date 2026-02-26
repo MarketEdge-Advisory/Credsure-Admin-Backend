@@ -1,5 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import nodemailer, { Transporter } from 'nodemailer';
+import { Injectable, Logger } from '@nestjs/common';
 
 interface ResetPasswordMailInput {
   to: string;
@@ -14,24 +13,28 @@ interface FinanceApplicationNotificationInput {
 
 @Injectable()
 export class MailService {
-  private transporter: Transporter | null = null;
+  private readonly logger = new Logger(MailService.name);
+
+  private get apiKey() {
+    return process.env.RESEND_API_KEY;
+  }
+
+  private get fromAddress() {
+    return process.env.RESEND_FROM_EMAIL || process.env.EMAIL_FROM;
+  }
+
+  isConfigured() {
+    return Boolean(this.apiKey && this.fromAddress);
+  }
 
   async sendResetPasswordCode(input: ResetPasswordMailInput): Promise<void> {
     const { to, code } = input;
-    const from = process.env.SMTP_FROM;
     const appName = process.env.APP_NAME || 'Credsure Admin';
-
-    if (!from) {
-      throw new Error('SMTP_FROM is not configured.');
-    }
-
-    const transporter = this.getTransporter();
-    await transporter.sendMail({
-      from,
+    const html = `<p>Your password reset code is <strong>${code}</strong>.</p><p>This code expires in 15 minutes.</p>`;
+    await this.sendEmail({
       to,
       subject: `${appName} password reset code`,
-      text: `Your password reset code is ${code}. This code expires in 15 minutes.`,
-      html: `<p>Your password reset code is <strong>${code}</strong>.</p><p>This code expires in 15 minutes.</p>`,
+      html,
     });
   }
 
@@ -39,46 +42,42 @@ export class MailService {
     input: FinanceApplicationNotificationInput,
   ): Promise<void> {
     const { to, fullName, email } = input;
-    const from = process.env.SMTP_FROM;
     const appName = process.env.APP_NAME || 'Credsure Admin';
-    if (!from) {
-      throw new Error('SMTP_FROM is not configured.');
-    }
-
-    const transporter = this.getTransporter();
-    await transporter.sendMail({
-      from,
+    await this.sendEmail({
       to,
-      subject: `${appName} new finance application`,
-      text: `New finance application from ${fullName} (${email}).`,
-      html: `<p>New finance application from <strong>${fullName}</strong> (${email}).</p>`,
+      subject: `${appName} finance application received`,
+      html: `<p>Hi <strong>${fullName}</strong>,</p><p>We have received your finance application (${email}).</p><p>Our team will contact you shortly.</p>`,
     });
   }
 
-  private getTransporter(): Transporter {
-    if (this.transporter) {
-      return this.transporter;
+  private async sendEmail(params: {
+    to: string;
+    subject: string;
+    html: string;
+  }): Promise<void> {
+    if (!this.isConfigured()) {
+      this.logger.warn('Resend API is not configured - skipping email send');
+      throw new Error('Resend API is not configured');
     }
 
-    const host = process.env.SMTP_HOST;
-    const port = Number(process.env.SMTP_PORT || 587);
-    const user = process.env.SMTP_USER;
-    const pass = process.env.SMTP_PASS;
-    const secure = process.env.SMTP_SECURE === 'true';
-
-    if (!host || !user || !pass) {
-      throw new Error(
-        'SMTP_HOST, SMTP_USER, and SMTP_PASS must be configured.',
-      );
-    }
-
-    this.transporter = nodemailer.createTransport({
-      host,
-      port,
-      secure,
-      auth: { user, pass },
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${this.apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: this.fromAddress!,
+        to: params.to,
+        subject: params.subject,
+        html: params.html,
+      }),
     });
 
-    return this.transporter;
+    if (!response.ok) {
+      const errorText = await response.text();
+      this.logger.error(`Resend API error (${response.status}): ${errorText}`);
+      throw new Error(errorText || 'Unable to send email via Resend');
+    }
   }
 }
