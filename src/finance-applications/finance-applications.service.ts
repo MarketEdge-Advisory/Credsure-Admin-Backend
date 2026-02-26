@@ -93,7 +93,6 @@ export class FinanceApplicationsService {
       await this.mailService.sendFinanceApplicationNotification({
         to: created.email,
         fullName: created.fullName,
-        email: created.email,
       });
     } catch (error) {
       console.error(

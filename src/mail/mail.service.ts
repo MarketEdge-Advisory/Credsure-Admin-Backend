@@ -8,7 +8,6 @@ interface ResetPasswordMailInput {
 interface FinanceApplicationNotificationInput {
   to: string;
   fullName: string;
-  email: string;
 }
 
 @Injectable()
@@ -41,12 +40,12 @@ export class MailService {
   async sendFinanceApplicationNotification(
     input: FinanceApplicationNotificationInput,
   ): Promise<void> {
-    const { to, fullName, email } = input;
+    const { to, fullName } = input;
     const appName = process.env.APP_NAME || 'Credsure Admin';
     await this.sendEmail({
       to,
       subject: `${appName} finance application received`,
-      html: `<p>Hi <strong>${fullName}</strong>,</p><p>We have received your finance application (${email}).</p><p>Our team will contact you shortly.</p>`,
+      html: `<p>Hi <strong>${fullName}</strong>,</p><p>Your loan request is under review.</p><p>We'll get back to you shortly.</p><p>Regards,<br/>Credsure Team</p>`,
     });
   }
 
