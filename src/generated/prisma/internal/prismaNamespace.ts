@@ -1349,6 +1349,7 @@ export const CarScalarFieldEnum = {
   category: 'category',
   modelYear: 'modelYear',
   basePrice: 'basePrice',
+  numberOfUnits: 'numberOfUnits',
   variant: 'variant',
   description: 'description',
   availability: 'availability',

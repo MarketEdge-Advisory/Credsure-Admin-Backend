@@ -29,11 +29,13 @@ export type AggregateCar = {
 export type CarAvgAggregateOutputType = {
   modelYear: number | null
   basePrice: runtime.Decimal | null
+  numberOfUnits: number | null
 }
 
 export type CarSumAggregateOutputType = {
   modelYear: number | null
   basePrice: runtime.Decimal | null
+  numberOfUnits: number | null
 }
 
 export type CarMinAggregateOutputType = {
@@ -42,6 +44,7 @@ export type CarMinAggregateOutputType = {
   category: string | null
   modelYear: number | null
   basePrice: runtime.Decimal | null
+  numberOfUnits: number | null
   variant: string | null
   description: string | null
   availability: $Enums.CarAvailability | null
@@ -56,6 +59,7 @@ export type CarMaxAggregateOutputType = {
   category: string | null
   modelYear: number | null
   basePrice: runtime.Decimal | null
+  numberOfUnits: number | null
   variant: string | null
   description: string | null
   availability: $Enums.CarAvailability | null
@@ -70,6 +74,7 @@ export type CarCountAggregateOutputType = {
   category: number
   modelYear: number
   basePrice: number
+  numberOfUnits: number
   variant: number
   description: number
   availability: number
@@ -83,11 +88,13 @@ export type CarCountAggregateOutputType = {
 export type CarAvgAggregateInputType = {
   modelYear?: true
   basePrice?: true
+  numberOfUnits?: true
 }
 
 export type CarSumAggregateInputType = {
   modelYear?: true
   basePrice?: true
+  numberOfUnits?: true
 }
 
 export type CarMinAggregateInputType = {
@@ -96,6 +103,7 @@ export type CarMinAggregateInputType = {
   category?: true
   modelYear?: true
   basePrice?: true
+  numberOfUnits?: true
   variant?: true
   description?: true
   availability?: true
@@ -110,6 +118,7 @@ export type CarMaxAggregateInputType = {
   category?: true
   modelYear?: true
   basePrice?: true
+  numberOfUnits?: true
   variant?: true
   description?: true
   availability?: true
@@ -124,6 +133,7 @@ export type CarCountAggregateInputType = {
   category?: true
   modelYear?: true
   basePrice?: true
+  numberOfUnits?: true
   variant?: true
   description?: true
   availability?: true
@@ -225,6 +235,7 @@ export type CarGroupByOutputType = {
   category: string
   modelYear: number
   basePrice: runtime.Decimal
+  numberOfUnits: number
   variant: string | null
   description: string | null
   availability: $Enums.CarAvailability
@@ -262,6 +273,7 @@ export type CarWhereInput = {
   category?: Prisma.StringFilter<"Car"> | string
   modelYear?: Prisma.IntFilter<"Car"> | number
   basePrice?: Prisma.DecimalFilter<"Car"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntFilter<"Car"> | number
   variant?: Prisma.StringNullableFilter<"Car"> | string | null
   description?: Prisma.StringNullableFilter<"Car"> | string | null
   availability?: Prisma.EnumCarAvailabilityFilter<"Car"> | $Enums.CarAvailability
@@ -279,6 +291,7 @@ export type CarOrderByWithRelationInput = {
   category?: Prisma.SortOrder
   modelYear?: Prisma.SortOrder
   basePrice?: Prisma.SortOrder
+  numberOfUnits?: Prisma.SortOrder
   variant?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   availability?: Prisma.SortOrder
@@ -299,6 +312,7 @@ export type CarWhereUniqueInput = Prisma.AtLeast<{
   category?: Prisma.StringFilter<"Car"> | string
   modelYear?: Prisma.IntFilter<"Car"> | number
   basePrice?: Prisma.DecimalFilter<"Car"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntFilter<"Car"> | number
   variant?: Prisma.StringNullableFilter<"Car"> | string | null
   description?: Prisma.StringNullableFilter<"Car"> | string | null
   availability?: Prisma.EnumCarAvailabilityFilter<"Car"> | $Enums.CarAvailability
@@ -316,6 +330,7 @@ export type CarOrderByWithAggregationInput = {
   category?: Prisma.SortOrder
   modelYear?: Prisma.SortOrder
   basePrice?: Prisma.SortOrder
+  numberOfUnits?: Prisma.SortOrder
   variant?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   availability?: Prisma.SortOrder
@@ -338,6 +353,7 @@ export type CarScalarWhereWithAggregatesInput = {
   category?: Prisma.StringWithAggregatesFilter<"Car"> | string
   modelYear?: Prisma.IntWithAggregatesFilter<"Car"> | number
   basePrice?: Prisma.DecimalWithAggregatesFilter<"Car"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntWithAggregatesFilter<"Car"> | number
   variant?: Prisma.StringNullableWithAggregatesFilter<"Car"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Car"> | string | null
   availability?: Prisma.EnumCarAvailabilityWithAggregatesFilter<"Car"> | $Enums.CarAvailability
@@ -352,6 +368,7 @@ export type CarCreateInput = {
   category: string
   modelYear: number
   basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: number
   variant?: string | null
   description?: string | null
   availability?: $Enums.CarAvailability
@@ -369,6 +386,7 @@ export type CarUncheckedCreateInput = {
   category: string
   modelYear: number
   basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: number
   variant?: string | null
   description?: string | null
   availability?: $Enums.CarAvailability
@@ -386,6 +404,7 @@ export type CarUpdateInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   modelYear?: Prisma.IntFieldUpdateOperationsInput | number
   basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntFieldUpdateOperationsInput | number
   variant?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   availability?: Prisma.EnumCarAvailabilityFieldUpdateOperationsInput | $Enums.CarAvailability
@@ -403,6 +422,7 @@ export type CarUncheckedUpdateInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   modelYear?: Prisma.IntFieldUpdateOperationsInput | number
   basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntFieldUpdateOperationsInput | number
   variant?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   availability?: Prisma.EnumCarAvailabilityFieldUpdateOperationsInput | $Enums.CarAvailability
@@ -420,6 +440,7 @@ export type CarCreateManyInput = {
   category: string
   modelYear: number
   basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: number
   variant?: string | null
   description?: string | null
   availability?: $Enums.CarAvailability
@@ -434,6 +455,7 @@ export type CarUpdateManyMutationInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   modelYear?: Prisma.IntFieldUpdateOperationsInput | number
   basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntFieldUpdateOperationsInput | number
   variant?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   availability?: Prisma.EnumCarAvailabilityFieldUpdateOperationsInput | $Enums.CarAvailability
@@ -448,6 +470,7 @@ export type CarUncheckedUpdateManyInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   modelYear?: Prisma.IntFieldUpdateOperationsInput | number
   basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntFieldUpdateOperationsInput | number
   variant?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   availability?: Prisma.EnumCarAvailabilityFieldUpdateOperationsInput | $Enums.CarAvailability
@@ -462,6 +485,7 @@ export type CarCountOrderByAggregateInput = {
   category?: Prisma.SortOrder
   modelYear?: Prisma.SortOrder
   basePrice?: Prisma.SortOrder
+  numberOfUnits?: Prisma.SortOrder
   variant?: Prisma.SortOrder
   description?: Prisma.SortOrder
   availability?: Prisma.SortOrder
@@ -473,6 +497,7 @@ export type CarCountOrderByAggregateInput = {
 export type CarAvgOrderByAggregateInput = {
   modelYear?: Prisma.SortOrder
   basePrice?: Prisma.SortOrder
+  numberOfUnits?: Prisma.SortOrder
 }
 
 export type CarMaxOrderByAggregateInput = {
@@ -481,6 +506,7 @@ export type CarMaxOrderByAggregateInput = {
   category?: Prisma.SortOrder
   modelYear?: Prisma.SortOrder
   basePrice?: Prisma.SortOrder
+  numberOfUnits?: Prisma.SortOrder
   variant?: Prisma.SortOrder
   description?: Prisma.SortOrder
   availability?: Prisma.SortOrder
@@ -495,6 +521,7 @@ export type CarMinOrderByAggregateInput = {
   category?: Prisma.SortOrder
   modelYear?: Prisma.SortOrder
   basePrice?: Prisma.SortOrder
+  numberOfUnits?: Prisma.SortOrder
   variant?: Prisma.SortOrder
   description?: Prisma.SortOrder
   availability?: Prisma.SortOrder
@@ -506,6 +533,7 @@ export type CarMinOrderByAggregateInput = {
 export type CarSumOrderByAggregateInput = {
   modelYear?: Prisma.SortOrder
   basePrice?: Prisma.SortOrder
+  numberOfUnits?: Prisma.SortOrder
 }
 
 export type CarScalarRelationFilter = {
@@ -572,6 +600,7 @@ export type CarCreateWithoutImagesInput = {
   category: string
   modelYear: number
   basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: number
   variant?: string | null
   description?: string | null
   availability?: $Enums.CarAvailability
@@ -588,6 +617,7 @@ export type CarUncheckedCreateWithoutImagesInput = {
   category: string
   modelYear: number
   basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: number
   variant?: string | null
   description?: string | null
   availability?: $Enums.CarAvailability
@@ -620,6 +650,7 @@ export type CarUpdateWithoutImagesInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   modelYear?: Prisma.IntFieldUpdateOperationsInput | number
   basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntFieldUpdateOperationsInput | number
   variant?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   availability?: Prisma.EnumCarAvailabilityFieldUpdateOperationsInput | $Enums.CarAvailability
@@ -636,6 +667,7 @@ export type CarUncheckedUpdateWithoutImagesInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   modelYear?: Prisma.IntFieldUpdateOperationsInput | number
   basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntFieldUpdateOperationsInput | number
   variant?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   availability?: Prisma.EnumCarAvailabilityFieldUpdateOperationsInput | $Enums.CarAvailability
@@ -652,6 +684,7 @@ export type CarCreateWithoutSpecificationsInput = {
   category: string
   modelYear: number
   basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: number
   variant?: string | null
   description?: string | null
   availability?: $Enums.CarAvailability
@@ -668,6 +701,7 @@ export type CarUncheckedCreateWithoutSpecificationsInput = {
   category: string
   modelYear: number
   basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: number
   variant?: string | null
   description?: string | null
   availability?: $Enums.CarAvailability
@@ -700,6 +734,7 @@ export type CarUpdateWithoutSpecificationsInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   modelYear?: Prisma.IntFieldUpdateOperationsInput | number
   basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntFieldUpdateOperationsInput | number
   variant?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   availability?: Prisma.EnumCarAvailabilityFieldUpdateOperationsInput | $Enums.CarAvailability
@@ -716,6 +751,7 @@ export type CarUncheckedUpdateWithoutSpecificationsInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   modelYear?: Prisma.IntFieldUpdateOperationsInput | number
   basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntFieldUpdateOperationsInput | number
   variant?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   availability?: Prisma.EnumCarAvailabilityFieldUpdateOperationsInput | $Enums.CarAvailability
@@ -732,6 +768,7 @@ export type CarCreateWithoutFinanceApplicationsInput = {
   category: string
   modelYear: number
   basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: number
   variant?: string | null
   description?: string | null
   availability?: $Enums.CarAvailability
@@ -748,6 +785,7 @@ export type CarUncheckedCreateWithoutFinanceApplicationsInput = {
   category: string
   modelYear: number
   basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: number
   variant?: string | null
   description?: string | null
   availability?: $Enums.CarAvailability
@@ -780,6 +818,7 @@ export type CarUpdateWithoutFinanceApplicationsInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   modelYear?: Prisma.IntFieldUpdateOperationsInput | number
   basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntFieldUpdateOperationsInput | number
   variant?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   availability?: Prisma.EnumCarAvailabilityFieldUpdateOperationsInput | $Enums.CarAvailability
@@ -796,6 +835,7 @@ export type CarUncheckedUpdateWithoutFinanceApplicationsInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   modelYear?: Prisma.IntFieldUpdateOperationsInput | number
   basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  numberOfUnits?: Prisma.IntFieldUpdateOperationsInput | number
   variant?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   availability?: Prisma.EnumCarAvailabilityFieldUpdateOperationsInput | $Enums.CarAvailability
@@ -861,6 +901,7 @@ export type CarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   category?: boolean
   modelYear?: boolean
   basePrice?: boolean
+  numberOfUnits?: boolean
   variant?: boolean
   description?: boolean
   availability?: boolean
@@ -879,6 +920,7 @@ export type CarSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
   category?: boolean
   modelYear?: boolean
   basePrice?: boolean
+  numberOfUnits?: boolean
   variant?: boolean
   description?: boolean
   availability?: boolean
@@ -893,6 +935,7 @@ export type CarSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
   category?: boolean
   modelYear?: boolean
   basePrice?: boolean
+  numberOfUnits?: boolean
   variant?: boolean
   description?: boolean
   availability?: boolean
@@ -907,6 +950,7 @@ export type CarSelectScalar = {
   category?: boolean
   modelYear?: boolean
   basePrice?: boolean
+  numberOfUnits?: boolean
   variant?: boolean
   description?: boolean
   availability?: boolean
@@ -915,7 +959,7 @@ export type CarSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CarOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "category" | "modelYear" | "basePrice" | "variant" | "description" | "availability" | "isFeatured" | "createdAt" | "updatedAt", ExtArgs["result"]["car"]>
+export type CarOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "category" | "modelYear" | "basePrice" | "numberOfUnits" | "variant" | "description" | "availability" | "isFeatured" | "createdAt" | "updatedAt", ExtArgs["result"]["car"]>
 export type CarInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | Prisma.Car$imagesArgs<ExtArgs>
   specifications?: boolean | Prisma.Car$specificationsArgs<ExtArgs>
@@ -938,6 +982,7 @@ export type $CarPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     category: string
     modelYear: number
     basePrice: runtime.Decimal
+    numberOfUnits: number
     variant: string | null
     description: string | null
     availability: $Enums.CarAvailability
@@ -1375,6 +1420,7 @@ export interface CarFieldRefs {
   readonly category: Prisma.FieldRef<"Car", 'String'>
   readonly modelYear: Prisma.FieldRef<"Car", 'Int'>
   readonly basePrice: Prisma.FieldRef<"Car", 'Decimal'>
+  readonly numberOfUnits: Prisma.FieldRef<"Car", 'Int'>
   readonly variant: Prisma.FieldRef<"Car", 'String'>
   readonly description: Prisma.FieldRef<"Car", 'String'>
   readonly availability: Prisma.FieldRef<"Car", 'CarAvailability'>

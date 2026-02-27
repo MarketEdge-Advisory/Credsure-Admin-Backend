@@ -27,6 +27,7 @@ enum ContentStatus {
 enum CarAvailability {
     AVAILABLE
     NOT_AVAILABLE
+    COMING_SOON
 }
 
 enum FinanceApplicationStatus {
