@@ -2,12 +2,12 @@ import {
   BadRequestException,
   Controller,
   Post,
-  UploadedFile,
+  UploadedFiles,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { Express } from 'express';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import {
   ApiBody,
   ApiBearerAuth,
@@ -30,7 +30,7 @@ export class UploadController {
   constructor(private readonly cloudinaryService: CloudinaryService) {}
 
   @Post('images')
-  @ApiOperation({ summary: 'Upload car image to Cloudinary' })
+  @ApiOperation({ summary: 'Upload one or more car images to Cloudinary' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -40,11 +40,23 @@ export class UploadController {
           type: 'string',
           format: 'binary',
         },
+        files: {
+          type: 'array',
+          items: {
+            type: 'string',
+            format: 'binary',
+          },
+        },
       },
     },
   })
   @UseInterceptors(
-    FileInterceptor('file', {
+    FileFieldsInterceptor(
+      [
+        { name: 'file', maxCount: 1 },
+        { name: 'files', maxCount: 10 },
+      ],
+      {
       limits: {
         fileSize: 5 * 1024 * 1024,
       },
@@ -57,16 +69,32 @@ export class UploadController {
         }
         cb(null, true);
       },
-    }),
+      },
+    ),
   )
-  async uploadImage(@UploadedFile() file: Express.Multer.File) {
-    if (!file) {
-      throw new BadRequestException('No file provided');
+  async uploadImage(
+    @UploadedFiles()
+    uploadedFiles: {
+      file?: Express.Multer.File[];
+      files?: Express.Multer.File[];
+    },
+  ) {
+    const files = [
+      ...(uploadedFiles?.file ?? []),
+      ...(uploadedFiles?.files ?? []),
+    ];
+
+    if (!files.length) {
+      throw new BadRequestException('No file provided.');
     }
 
-    const imageUrl = await this.cloudinaryService.uploadImage(file, 'cars');
+    const imageUrls = await Promise.all(
+      files.map((file) => this.cloudinaryService.uploadImage(file, 'cars')),
+    );
+
     return {
-      imageUrl,
+      imageUrls,
+      imageUrl: imageUrls[0] ?? null,
     };
   }
 }

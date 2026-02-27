@@ -44,7 +44,7 @@ export class MailService {
     const appName = process.env.APP_NAME || 'Credsure Admin';
     await this.sendEmail({
       to,
-      subject: `${appName} finance application received`,
+      subject: `Loan Application received`,
       html: `<p>Hi <strong>${fullName}</strong>,</p><p>Your loan request is under review.</p><p>We'll get back to you shortly.</p><p>Regards,<br/>Credsure Team</p>`,
     });
   }
