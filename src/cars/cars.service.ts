@@ -465,6 +465,12 @@ export class CarsService {
     images: Array<{ id: string; imageUrl: string; position: number }>;
     specifications: CarSpecView[];
   }): CarView {
+    const images = car.images.map((image) => ({
+      id: image.id,
+      url: image.imageUrl,
+      position: image.position,
+    }));
+
     return {
       id: car.id,
       name: car.name,
@@ -476,11 +482,9 @@ export class CarsService {
       availability: car.availability,
       isFeatured: car.isFeatured,
       specs: this.mapSpec(car.specifications),
-      images: car.images.map((image) => ({
-        id: image.id,
-        url: image.imageUrl,
-        position: image.position,
-      })),
+      images,
+      imageUrls: images.map((image) => image.url),
+      primaryImageUrl: images[0]?.url ?? null,
       createdAt: car.createdAt.toISOString(),
       updatedAt: car.updatedAt.toISOString(),
     };

@@ -22,6 +22,8 @@ export interface CarView {
   isFeatured: boolean;
   specs: CarSpecView;
   images: CarImageView[];
+  imageUrls: string[];
+  primaryImageUrl: string | null;
   createdAt: string;
   updatedAt: string;
 }
