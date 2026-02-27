@@ -64,6 +64,12 @@ export class CreateCarDto {
   @Min(0.01)
   basePrice: number;
 
+  @ApiPropertyOptional({ example: 5 })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  numberOfUnits?: number;
+
   @ApiPropertyOptional({ example: 'GLX' })
   @IsOptional()
   @IsString()
@@ -119,6 +125,12 @@ export class UpdateCarDto {
   @IsNumber()
   @Min(0.01)
   basePrice?: number;
+
+  @ApiPropertyOptional({ example: 5 })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  numberOfUnits?: number;
 
   @ApiPropertyOptional({ example: 'GLX' })
   @IsOptional()

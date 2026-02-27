@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Car"
+ADD COLUMN "numberOfUnits" INTEGER NOT NULL DEFAULT 0;

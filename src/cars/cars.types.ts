@@ -16,6 +16,7 @@ export interface CarView {
   category: string;
   modelYear: number;
   basePrice: number;
+  numberOfUnits: number;
   variant: string;
   description: string;
   availability: 'AVAILABLE' | 'NOT_AVAILABLE' | 'COMING_SOON';

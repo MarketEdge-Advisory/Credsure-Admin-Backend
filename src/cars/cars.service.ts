@@ -47,6 +47,7 @@ export class CarsService {
       category,
       modelYear,
       basePrice,
+      numberOfUnits,
       variant,
       description,
       availability,
@@ -61,6 +62,7 @@ export class CarsService {
         category: category?.trim() || 'Uncategorized',
         modelYear: modelYear ?? new Date().getFullYear(),
         basePrice: basePrice.toFixed(2),
+        numberOfUnits: numberOfUnits ?? 0,
         variant: variant?.trim() || null,
         description: description?.trim() || null,
         availability: availability ?? 'AVAILABLE',
@@ -97,6 +99,7 @@ export class CarsService {
         category: created.category,
         modelYear: created.modelYear,
         basePrice: Number(created.basePrice),
+        numberOfUnits: created.numberOfUnits,
       },
     });
 
@@ -109,8 +112,16 @@ export class CarsService {
     carId: string,
     updateCarDto: UpdateCarDto,
   ) {
-    const { name, category, modelYear, basePrice, variant, description, specs } =
-      updateCarDto;
+    const {
+      name,
+      category,
+      modelYear,
+      basePrice,
+      numberOfUnits,
+      variant,
+      description,
+      specs,
+    } = updateCarDto;
 
     await this.findCar(carId);
 
@@ -125,6 +136,7 @@ export class CarsService {
             basePrice !== undefined
               ? basePrice.toFixed(2)
               : undefined,
+          numberOfUnits,
           variant:
             variant !== undefined
               ? variant.trim() || null
@@ -456,6 +468,7 @@ export class CarsService {
     category: string;
     modelYear: number;
     basePrice: unknown;
+    numberOfUnits: number;
     variant: string | null;
     description: string | null;
     availability: 'AVAILABLE' | 'NOT_AVAILABLE' | 'COMING_SOON';
@@ -477,6 +490,7 @@ export class CarsService {
       category: car.category,
       modelYear: car.modelYear,
       basePrice: Number(car.basePrice),
+      numberOfUnits: car.numberOfUnits,
       variant: car.variant ?? '',
       description: car.description ?? '',
       availability: car.availability,
