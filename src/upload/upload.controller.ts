@@ -53,8 +53,8 @@ export class UploadController {
   @UseInterceptors(
     FileFieldsInterceptor(
       [
-        { name: 'file', maxCount: 1 },
-        { name: 'files', maxCount: 10 },
+        { name: 'file' },
+        { name: 'files' },
       ],
       {
       limits: {
