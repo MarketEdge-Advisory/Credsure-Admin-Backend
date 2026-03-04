@@ -96,6 +96,65 @@ export class AdminConfigService {
     };
   }
 
+  async getCalculatorConfigHistory(query: InterestRateHistoryQueryDto) {
+    const page = query.page ?? 1;
+    const limit = query.limit ?? 10;
+    const skip = (page - 1) * limit;
+
+    const where = {
+      action: 'UPDATE_CALCULATOR_CONFIG',
+      entityType: 'CalculatorConfig',
+    } as const;
+
+    const [items, total] = await this.prisma.$transaction([
+      this.prisma.activityLog.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          id: true,
+          actorId: true,
+          actorRole: true,
+          metadata: true,
+          createdAt: true,
+          actor: {
+            select: {
+              email: true,
+            },
+          },
+        },
+      }),
+      this.prisma.activityLog.count({ where }),
+    ]);
+
+    return {
+      items: items.map((item) => {
+        const metadata =
+          item.metadata && typeof item.metadata === 'object'
+            ? (item.metadata as Record<string, unknown>)
+            : {};
+
+        return {
+          id: item.id,
+          downPaymentPct: Number(metadata.downPaymentPct ?? 0),
+          processingFeePct: Number(metadata.processingFeePct ?? 0),
+          insuranceCost: Number(metadata.insuranceCost ?? 0),
+          changedById: item.actorId,
+          changedByRole: item.actorRole,
+          changedByEmail: item.actor?.email ?? null,
+          createdAt: item.createdAt.toISOString(),
+        };
+      }),
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+      },
+    };
+  }
+
   async updateInterestRate(
     actorId: string,
     actorRole: Role,

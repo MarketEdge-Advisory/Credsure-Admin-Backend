@@ -46,6 +46,12 @@ export class AdminConfigController {
   }
 
   @Roles(Role.CredsureAdmin, Role.SuperAdmin)
+  @Get('calculator/history')
+  getCalculatorConfigHistory(@Query() query: InterestRateHistoryQueryDto) {
+    return this.adminConfigService.getCalculatorConfigHistory(query);
+  }
+
+  @Roles(Role.CredsureAdmin, Role.SuperAdmin)
   @Patch('interest-rate')
   updateInterestRate(
     @Req() req: RequestWithUser,

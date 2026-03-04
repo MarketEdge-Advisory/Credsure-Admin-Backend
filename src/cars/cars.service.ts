@@ -66,7 +66,6 @@ export class CarsService {
     transmission: 'transmission',
     stockavailability: 'availability',
 
-    // camelCase fallbacks
     name: 'name',
     description: 'description',
     baseprice: 'basePrice',
