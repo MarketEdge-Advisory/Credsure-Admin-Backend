@@ -59,10 +59,11 @@ export class CreateCarDto {
   @Min(1990)
   modelYear?: number;
 
-  @ApiProperty({ example: 18500000 })
+  @ApiPropertyOptional({ example: 18500000 })
+  @IsOptional()
   @IsNumber()
   @Min(0.01)
-  basePrice: number;
+  basePrice?: number;
 
   @ApiPropertyOptional({ example: 5 })
   @IsOptional()

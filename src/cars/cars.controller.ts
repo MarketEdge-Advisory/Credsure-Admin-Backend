@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -7,9 +8,19 @@ import {
   Patch,
   Post,
   Req,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { Express } from 'express';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Role } from '../common/enums/role.enum';
 import { RequestWithUser } from '../common/interfaces/request-with-user.interface';
 import { successResponse } from '../common/utils/response.util';
@@ -26,6 +37,7 @@ import {
   UpdateCarPriceDto,
   UpsertCarImagesDto,
 } from './dto/cars.dto';
+import { memoryStorage } from 'multer';
 
 @ApiTags('Cars')
 @Controller('cars')
@@ -197,5 +209,128 @@ export class CarsController {
       carId,
     );
     return successResponse('Car deleted successfully', result);
+  }
+
+  //   @Post('import/validate')
+  //   @UseGuards(AuthGuard, RolesGuard)
+  //   @Roles(Role.SuzukiAdmin, Role.SuperAdmin)
+  //   @ApiBearerAuth()
+  //   @ApiOperation({
+  //     summary:
+  //       'Upload a CSV/Excel sheet and validate car rows against the import format',
+  //   })
+  //   @ApiConsumes('multipart/form-data')
+  //   @ApiBody({
+  //     schema: {
+  //       type: 'object',
+  //       properties: {
+  //         file: {
+  //           type: 'string',
+  //           format: 'binary',
+  //         },
+  //       },
+  //       required: ['file'],
+  //     },
+  //   })
+  //   @UseInterceptors(
+  //     FileInterceptor('file', {
+  //       limits: { fileSize: 10 * 1024 * 1024 },
+  //     }),
+  //   )
+  //   async validateImportSheet(@UploadedFile() file?: Express.Multer.File) {
+  //     const result = await this.carsService.validateImportSheet(file);
+  //     return successResponse('Import sheet validated successfully', result);
+  //   }
+
+  @Post('import/validate')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.SuzukiAdmin, Role.SuperAdmin)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary:
+      'Upload a CSV/Excel sheet and validate car rows against the import format',
+  })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+      required: ['file'],
+    },
+  })
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: memoryStorage(),
+      limits: { fileSize: 10 * 1024 * 1024 },
+      fileFilter: (_req, file, cb) => {
+        const allowed = [
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          'application/vnd.ms-excel',
+          'text/csv',
+        ];
+        if (allowed.includes(file.mimetype)) {
+          cb(null, true);
+        } else {
+          cb(
+            new BadRequestException(
+              'Only .xlsx, .xls, or .csv files are allowed',
+            ),
+            false,
+          );
+        }
+      },
+    }),
+  )
+  async validateImportSheet(@UploadedFile() file?: Express.Multer.File) {
+    if (!file) throw new BadRequestException('No file uploaded.');
+    const result = await this.carsService.validateImportSheet(file);
+    return successResponse('Import sheet validated successfully', result);
+  }
+
+  @Post('import/confirm')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.SuzukiAdmin, Role.SuperAdmin)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Upload and import valid car rows into the database',
+  })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: { file: { type: 'string', format: 'binary' } },
+      required: ['file'],
+    },
+  })
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: memoryStorage(),
+      limits: { fileSize: 10 * 1024 * 1024 },
+      fileFilter: (_req, file, cb) => {
+        const allowed = [
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          'application/vnd.ms-excel',
+          'text/csv',
+        ];
+        allowed.includes(file.mimetype)
+          ? cb(null, true)
+          : cb(
+              new BadRequestException(
+                'Only .xlsx, .xls, or .csv files are allowed',
+              ),
+              false,
+            );
+      },
+    }),
+  )
+  async confirmImport(@UploadedFile() file?: Express.Multer.File) {
+    if (!file) throw new BadRequestException('No file uploaded.');
+    const result = await this.carsService.confirmImport(file);
+    return successResponse('Import completed successfully', result);
   }
 }
