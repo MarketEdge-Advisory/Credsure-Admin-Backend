@@ -101,6 +101,45 @@ export class FinanceApplicationsService {
       );
     }
 
+    try {
+      const adminRecipients = await this.prisma.adminUser.findMany({
+        where: {
+          isActive: true,
+          role: {
+            in: [Role.CredsureAdmin, Role.SuzukiAdmin],
+          },
+        },
+        select: {
+          email: true,
+        },
+      });
+
+      const uniqueAdminEmails = Array.from(
+        new Set(
+          adminRecipients
+            .map((admin) => admin.email?.trim().toLowerCase())
+            .filter((email): email is string => Boolean(email)),
+        ),
+      );
+
+      await Promise.all(
+        uniqueAdminEmails.map((adminEmail) =>
+          this.mailService.sendFinanceApplicationAdminNotification({
+            to: adminEmail,
+            applicantFullName: created.fullName,
+            applicantEmail: created.email,
+            applicantPhoneNumber: created.phoneNumber,
+            selectedVehicle: created.selectedVehicle,
+          }),
+        ),
+      );
+    } catch (error) {
+      console.error(
+        'Failed to send finance application notification email to admins:',
+        error,
+      );
+    }
+
     return this.mapApplication(created);
   }
 

@@ -10,6 +10,14 @@ interface FinanceApplicationNotificationInput {
   fullName: string;
 }
 
+interface FinanceApplicationAdminNotificationInput {
+  to: string;
+  applicantFullName: string;
+  applicantEmail: string;
+  applicantPhoneNumber: string;
+  selectedVehicle?: string | null;
+}
+
 @Injectable()
 export class MailService {
   private readonly logger = new Logger(MailService.name);
@@ -46,6 +54,26 @@ export class MailService {
       to,
       subject: `Loan Application received`,
       html: `<p>Hi <strong>${fullName}</strong>,</p><p>Your loan request is under review.</p><p>We'll get back to you shortly.</p><p>Regards,<br/>Credsure Team</p>`,
+    });
+  }
+
+  async sendFinanceApplicationAdminNotification(
+    input: FinanceApplicationAdminNotificationInput,
+  ): Promise<void> {
+    const {
+      to,
+      applicantFullName,
+      applicantEmail,
+      applicantPhoneNumber,
+      selectedVehicle,
+    } = input;
+
+    const vehicle = selectedVehicle?.trim() || 'Not specified';
+
+    await this.sendEmail({
+      to,
+      subject: 'New Loan Application Submitted',
+      html: `<p>A new loan application has been submitted.</p><p><strong>Name:</strong> ${applicantFullName}</p><p><strong>Email:</strong> ${applicantEmail}</p><p><strong>Phone:</strong> ${applicantPhoneNumber}</p><p><strong>Vehicle:</strong> ${vehicle}</p>`,
     });
   }
 
