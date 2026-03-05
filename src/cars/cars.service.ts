@@ -47,7 +47,7 @@ export class CarsService {
   private readonly importColumns = [
     'name',
     'description',
-    'basePrice',
+    'price',
     'variant',
     'numberOfUnits',
     'engine',
@@ -58,7 +58,7 @@ export class CarsService {
   private readonly headerAliases: Record<string, string> = {
     nameofmodel: 'name',
     specifications: 'description',
-    pricengn: 'basePrice',
+    pricengn: 'price',
     variant: 'variant',
     numberofunits: 'numberOfUnits',
     noofunits: 'numberOfUnits',
@@ -68,7 +68,8 @@ export class CarsService {
 
     name: 'name',
     description: 'description',
-    baseprice: 'basePrice',
+    baseprice: 'price',
+    price: 'price',
     engine: 'engine',
     availability: 'availability',
   };
@@ -158,7 +159,7 @@ export class CarsService {
 
       const name = this.asNonEmptyString(row.name)!;
       const description = this.asOptionalString(row.description);
-      const basePrice = this.asPriceNumber(row.basePrice);
+      const basePrice = this.asPriceNumber(row.price);
       const variant = this.asOptionalString(row.variant);
       const numberOfUnits = row.numberOfUnits
         ? Number(row.numberOfUnits)
@@ -238,12 +239,12 @@ export class CarsService {
       errors.push('name is required.');
     }
 
-    const basePriceRaw = this.asOptionalString(row.basePrice);
+    const basePriceRaw = this.asOptionalString(row.price);
     if (basePriceRaw !== null) {
       const basePrice = this.asPriceNumber(basePriceRaw);
       if (basePrice === null || basePrice <= 0) {
         errors.push(
-          'basePrice must be a valid positive amount (e.g., 18500000 or 18.5M).',
+          'price must be a valid positive amount (e.g., 18500000 or 18.5M).',
         );
       }
     }
