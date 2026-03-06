@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   ArrayNotEmpty,
   IsArray,
@@ -60,6 +60,11 @@ export class CreateCarDto {
   modelYear?: number;
 
   @ApiPropertyOptional({ example: 18500000 })
+  @Transform(({ value }) =>
+    value === '' || value === null || value === undefined
+      ? undefined
+      : Number(value),
+  )
   @IsOptional()
   @IsNumber()
   @Min(0.01)
@@ -122,6 +127,11 @@ export class UpdateCarDto {
   modelYear?: number;
 
   @ApiPropertyOptional({ example: 18500000 })
+  @Transform(({ value }) =>
+    value === '' || value === null || value === undefined
+      ? undefined
+      : Number(value),
+  )
   @IsOptional()
   @IsNumber()
   @Min(0.01)
