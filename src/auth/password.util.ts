@@ -21,6 +21,7 @@ export const verifyPassword = async (
   }
 
   const currentDigest = scryptSync(plainPassword, salt, 64);
+
   const savedDigest = Buffer.from(digest, 'hex');
   return (
     currentDigest.length === savedDigest.length &&

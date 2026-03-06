@@ -6,6 +6,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsString,
+  Matches,
   MinLength,
 } from 'class-validator';
 import { Role } from '../../common/enums/role.enum';
@@ -90,6 +91,10 @@ export class ResetPasswordDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(8)
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/, {
+    message:
+      'newPassword must include uppercase, lowercase, number, and special character.',
+  })
   newPassword: string;
 }
 
@@ -105,5 +110,9 @@ export class ChangePasswordDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(8)
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/, {
+    message:
+      'newPassword must include uppercase, lowercase, number, and special character.',
+  })
   newPassword: string;
 }
